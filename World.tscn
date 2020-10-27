@@ -1,0 +1,174 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Space.jpg" type="Texture" id=2]
+[ext_resource path="res://Path.tscn" type="PackedScene" id=3]
+[ext_resource path="res://RichTextLabel.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/ovni.png" type="Texture" id=5]
+[ext_resource path="res://World.gd" type="Script" id=6]
+[ext_resource path="res://Onvi1.gd" type="Script" id=7]
+[ext_resource path="res://Ovni2.gd" type="Script" id=8]
+[ext_resource path="res://ovni3.gd" type="Script" id=9]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 29.8295, 44.1971, 0, 0, 0, 0, 309.844, 36.419, 0, 0, 0, 0, 221.915, 573.165, 0, 0, 0, 0, 28.7659, 48.2372, 0, 0, 0, 0, 29.8295, 44.1971, 0, 0, 0, 0, 29.8254, 46.1182 )
+}
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28.9013, 10 )
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 198.607, 82.6337, 0, 0, 0, 0, 38.6277, 47.6715, 0, 0, 0, 0, 46.0439, 581.641, 0, 0, 0, 0, 198.607, 83.6932 )
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 28.0604, 10 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 123.663, 14.9891, 0, 0, 0, 0, 358.747, 23.8797, 0, 0, 0, 0, 382.953, 569.987, 0, 0, 0, 0, 123.385, 15.8876 )
+}
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 28.8221, 9.64553 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -19.493
+margin_top = -23.7283
+margin_right = 433.507
+margin_bottom = 624.272
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 198.421, 536.012 )
+
+[node name="Path2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( -34.3502, 241.47 )
+scale = Vector2( 0.937717, 1 )
+
+[node name="Wave11" type="Path2D" parent="."]
+position = Vector2( -4.78133, 1.42541 )
+scale = Vector2( 1.16622, 0.997513 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Wave11"]
+position = Vector2( 29.8295, 44.1971 )
+rotation = -0.0277719
+rotate = false
+
+[node name="KinematicBody2D3" type="KinematicBody2D" parent="Wave11/PathFollow2D3"]
+position = Vector2( -1.56927, 1.52212 )
+rotation = 0.00110521
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Wave11/PathFollow2D3/KinematicBody2D3"]
+position = Vector2( 0.404785, 0.0860291 )
+scale = Vector2( 0.244507, 0.191951 )
+frames = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wave11/PathFollow2D3/KinematicBody2D3"]
+position = Vector2( -0.232941, 0.500099 )
+shape = SubResource( 3 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 1.66443
+margin_top = 1.113
+margin_right = 131.664
+margin_bottom = 34.113
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wave12" type="Path2D" parent="."]
+curve = SubResource( 4 )
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Wave12"]
+position = Vector2( 198.607, 82.6337 )
+rotation = -2.92643
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="Wave12/PathFollow2D2"]
+position = Vector2( -1.62329, 1.51016 )
+rotation = -2.15723
+script = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wave12/PathFollow2D2/KinematicBody2D2"]
+position = Vector2( 1.91092, -0.0100708 )
+shape = SubResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Wave12/PathFollow2D2/KinematicBody2D2"]
+position = Vector2( 3.02802, -2.10046 )
+scale = Vector2( 0.254361, 0.173885 )
+frames = SubResource( 6 )
+
+[node name="Wave13" type="Path2D" parent="."]
+position = Vector2( 91.5747, 13.7311 )
+scale = Vector2( 0.760872, 0.97591 )
+curve = SubResource( 7 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Wave13"]
+position = Vector2( 123.663, 214.989 )
+rotation = -0.0277719
+v_offset = 200.0
+rotate = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="Wave13/PathFollow2D"]
+position = Vector2( -0.117744, -1.31165 )
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Wave13/PathFollow2D/KinematicBody2D"]
+position = Vector2( -0.471924, 0.242371 )
+scale = Vector2( 0.244163, 0.170423 )
+frames = SubResource( 8 )
+animation = "New Anim"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wave13/PathFollow2D/KinematicBody2D"]
+position = Vector2( -0.771694, 0.140306 )
+shape = SubResource( 9 )
